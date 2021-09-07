@@ -27,6 +27,22 @@ const fight = () => {
     console.log(
         enemyName + " attacked " + playerRobotName + ". " + playerRobotName + " now has " + playerHealth + " health remaining."
       );
+
+      // check enemy's health
+    if (enemyHealth <= 0) {
+        window.alert(enemyName + " has died!");
+    } 
+    else {
+        window.alert(enemyName + " still has " + enemyHealth + " health left.");
+    }
+
+    // check player's health
+    if (playerHealth <= 0) {
+        window.alert(playerRobotName + " has died!");
+    } 
+    else {
+        window.alert(playerRobotName + " still has " + playerHealth + " health left.");
+    }
 }
 
 fight();
