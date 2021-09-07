@@ -1,1 +1,9 @@
-window.alert('this is an alert!  JavaScript file is up and running now...')
+let playerRobotName = window.prompt("Please provide a name for your hunk of metal...")
+
+console.log(playerRobotName)
+
+const fight = () => {
+    window.alert("The fight has commenced!!")
+}
+
+//fight();
