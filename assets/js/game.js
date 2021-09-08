@@ -3,6 +3,7 @@ let playerRobotName = window.prompt(
 );
 let playerHealth = 100;
 let playerAttack = 10;
+let playerMoney = 10;
 
 console.log(
   "PlayerName:",
