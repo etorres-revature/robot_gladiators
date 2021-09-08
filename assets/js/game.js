@@ -28,14 +28,14 @@ const fight = (enemyName) => {
           playerRobotName + " has decided to skip this fight. Goodbye!"
         );
         // subtract money from playerMoney for skipping
-        playerMoney -= 10;
+        playerMoney -= Math.max(0, playerMoney - 10);
         console.log("playerMoney:", playerMoney);
         break;
       }
     }
 
     //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
-    enemyHealth -= playerAttack;
+    enemyHealth -= Math.max(0, enemyHealth - playerAttack);
 
     // Log a resulting message to the console so we know that it worked.
     console.log(
@@ -63,7 +63,7 @@ const fight = (enemyName) => {
     }
 
     // Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable.
-    playerHealth -= enemyAttack;
+    playerHealth -= Math.max(0, playerHealth - enemyAttack);
 
     // Log a resulting message to the console so we know that it worked.
     console.log(
