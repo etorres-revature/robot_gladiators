@@ -14,7 +14,7 @@ const fight = (enemyName) => {
   window.alert("The fight has commenced!!");
 
   // repeat and execute as long as the enemy-robot is alive
-  while (enemyHealth > 0) {
+  while (enemyHealth > 0 && playerHealth >0) {
     let promptFight = window.prompt(
       "Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose."
     );
@@ -61,6 +61,7 @@ const fight = (enemyName) => {
       // check player's health
       if (playerHealth <= 0) {
         window.alert(playerRobotName + " has died!");
+        break;
       } else {
         window.alert(
           playerRobotName + " still has " + playerHealth + " health left."
