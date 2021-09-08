@@ -9,6 +9,15 @@ let enemyNames = ["Domo Irigato, Mr. Roboto", "Amy Android", "Bob Borg"];
 let enemyHealth = 0;
 let enemyAttack = 12;
 
+let randomAttackUpgrade = 0;
+let randomHealthUpgrade = 0;
+
+const randomNumber = (min, max) => {
+  let value = Math.floor(Math.random() * (max - min + 1) + min);
+
+  return value;
+};
+
 const fight = (enemyName) => {
   // repeat and execute as long as the enemy-robot is alive
   while (enemyHealth > 0 && playerHealth > 0) {
@@ -34,8 +43,12 @@ const fight = (enemyName) => {
       }
     }
 
+    // generate random damage value based on player's attack power
+    let damage = randomNumber(playerAttack - 3, playerAttack);
+    console.log("enemy damage", damage)
+
     //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
-    enemyHealth -= Math.max(0, enemyHealth - playerAttack);
+    enemyHealth = Math.max(0, enemyHealth - damage);
 
     // Log a resulting message to the console so we know that it worked.
     console.log(
@@ -62,8 +75,11 @@ const fight = (enemyName) => {
       window.alert(enemyName + " still has " + enemyHealth + " health left.");
     }
 
+    damage = randomNumber(enemyAttack - 3, enemyAttack);
+    console.log("player damage", damage)
+
     // Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable.
-    playerHealth -= Math.max(0, playerHealth - enemyAttack);
+    playerHealth = Math.max(0, playerHealth - damage);
 
     // Log a resulting message to the console so we know that it worked.
     console.log(
@@ -108,7 +124,8 @@ const startGame = () => {
       let pickedEnemyName = enemyNames[i];
 
       // reset enemyHealth before starting new fight
-      enemyHealth = 50;
+      enemyHealth = randomNumber(40, 60);
+      console.log(enemyHealth)
 
       // use debugger to pause script from running and check what's going on at that moment in the code
       // debugger;
@@ -179,11 +196,12 @@ const shop = () => {
     case "REFILL":
     case "refill":
       if (playerMoney >= 5) {
-        window.alert("Refilling player's health by 40 for 5 dollars.");
-
         // increase health and decrease money
-        playerHealth += 40;
+        randomHealthUpgrade = randomNumber(25, 40)
+        playerHealth += randomHealthUpgrade;
         playerMoney -= 5;
+
+        window.alert("Refilling player's health by " + randomHealthUpgrade + " for five dollars.");
       } else {
         window.alert(playerMoney + " is not enough to buy this item...");
       }
@@ -192,11 +210,12 @@ const shop = () => {
     case "UPGRADE":
     case "upgrade":
       if (playerMoney >= 5) {
-        window.alert("Upgrading player's attack by 6 for 7 dollars.");
-
         // increase attack and decrease money
-        playerAttack += 8;
+        randomAttackUpgrade = randomNumber(5, 8)
+        playerAttack += randomAttackUpgrade
         playerMoney -= 5;
+
+        window.alert("Upgrading player's attack by " + randomAttackUpgrade + " for five dollars.");
       } else {
         window.alert(playerMoney + " is not enough to buy this item...");
       }
