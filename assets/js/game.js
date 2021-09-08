@@ -5,28 +5,11 @@ let playerHealth = 100;
 let playerAttack = 10;
 let playerMoney = 10;
 
-console.log(
-  "PlayerName:",
-  playerRobotName + ";",
-  "playerHealth",
-  playerHealth + ";",
-  "; playerAttack",
-  playerAttack + "."
-);
-
 let enemyNames = ["Domo Irigato, Mr. Roboto", "Amy Android", "Bob Borg"];
 let enemyHealth = 50;
 let enemyAttack = 12;
 
-console.log("enemy names are:", enemyNames)
-
-for(let i = 0; i < enemyNames.length; i++) {
-    console.log(enemyNames[i])
-    console.log(i);
-    console.log(enemyNames[i] + " is at " + i + " index");
-}
-
-const fight = () => {
+const fight = (enemyName) => {
   // Alert players that they are starting the round
   window.alert("The fight has commenced!!");
 
@@ -100,4 +83,6 @@ const fight = () => {
   }
 };
 
-// fight();
+for(var i = 0; i < enemyNames.length; i++) {
+    fight(enemyNames[i]);
+  }
