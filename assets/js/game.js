@@ -13,14 +13,14 @@ const fight = (enemyName) => {
   // repeat and execute as long as the enemy-robot is alive
   while (enemyHealth > 0 && playerHealth > 0) {
     // ask player if they'd liked to fight or run
-    var promptFight = window.prompt(
+    let promptFight = window.prompt(
       'Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.'
     );
 
     //if player skips confirm and stop the loop
     if (promptFight === "skip" || promptFight === "SKIP") {
       // confirm player wants to skip
-      var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+      let confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
       // if yes (true), leave fight
       if (confirmSkip) {
@@ -97,7 +97,7 @@ const startGame = () => {
   playerAttack = 10;
   playerMoney = 10;
 
-  for (var i = 0; i < enemyNames.length; i++) {
+  for (let i = 0; i < enemyNames.length; i++) {
     // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
     if (playerHealth > 0) {
       window.alert(
@@ -105,7 +105,7 @@ const startGame = () => {
       );
 
       // pick new enemy to fight based on the index of the enemyNames array
-      var pickedEnemyName = enemyNames[i];
+      let pickedEnemyName = enemyNames[i];
 
       // reset enemyHealth before starting new fight
       enemyHealth = 50;
@@ -115,6 +115,18 @@ const startGame = () => {
 
       // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
       fight(pickedEnemyName);
+
+      // if player is still alive and we're not at the last enemy in the array
+      if (i < enemyNames.length - 1 && playerHealth > 0) {
+        // ask if player wants to use the store before next round
+        var storeConfirm = window.confirm(
+          "The fight is over, visit the store before the next round?"
+        );
+
+        if (storeConfirm) {
+          shop();
+        }
+      }
     } else {
       window.alert(
         playerRobotName +
@@ -127,7 +139,7 @@ const startGame = () => {
   }
 
   //play again
-  endGame()
+  endGame();
 };
 
 // function to end the entire game
@@ -144,15 +156,66 @@ const endGame = () => {
   }
 
   // ask player if they'd like to play again
-let playAgainConfirm = window.confirm("Would you like to play again?");
+  let playAgainConfirm = window.confirm("Would you like to play again?");
 
-if (playAgainConfirm) {
-  // restart the game
-  startGame();
-} 
-else {
-  window.alert("Thank you for playing Robot Gladiators! Come back soon!");
-}
+  if (playAgainConfirm) {
+    // restart the game
+    startGame();
+  } else {
+    window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+  }
+};
+
+const shop = () => {
+  //   console.log("entered the shop");
+
+  // ask player what they'd like to do
+  var shopOptionPrompt = window.prompt(
+    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+  );
+
+  // use switch to carry out action
+  switch (shopOptionPrompt) {
+    case "REFILL":
+    case "refill":
+      if (playerMoney >= 5) {
+        window.alert("Refilling player's health by 40 for 5 dollars.");
+
+        // increase health and decrease money
+        playerHealth += 40;
+        playerMoney -= 5;
+      } else {
+        window.alert(playerMoney + " is not enough to buy this item...");
+      }
+      break;
+
+    case "UPGRADE":
+    case "upgrade":
+      if (playerMoney >= 5) {
+        window.alert("Upgrading player's attack by 6 for 7 dollars.");
+
+        // increase attack and decrease money
+        playerAttack += 8;
+        playerMoney -= 5;
+      } else {
+        window.alert(playerMoney + " is not enough to buy this item...");
+      }
+      break;
+
+    case "LEAVE":
+    case "leave":
+      window.alert("Leaving the store.");
+
+      // do nothing, so function will end
+      break;
+
+    default:
+      window.alert("You did not pick a valid option. Try again.");
+
+      // call shop() again to force player to pick a valid option
+      shop();
+      break;
+  }
 };
 
 //start the game when the page loads
