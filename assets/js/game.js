@@ -286,7 +286,7 @@ const shop = () => {
 
   // ask player what they'd like to do
   let shopOptionPrompt = window.prompt(
-    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? \n\n Press 1 to 'REFILL'; Press 2 to 'UPGRADE', or Press 3 to 'LEAVE' to make a choice."
+    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? \n\n Press 1 to 'REFILL'; Press 2 to 'UPGRADE', or Press 3 to 'LEAVE'."
   );
 
   shopOptionPrompt = parseInt(shopOptionPrompt);
