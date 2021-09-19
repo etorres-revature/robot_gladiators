@@ -257,7 +257,7 @@ const endGame = () => {
 
     window.alert(
       playerInfo.name +
-        "now has the high score score of " +
+        " now has the high score score of " +
         playerInfo.money +
         "."
     );
