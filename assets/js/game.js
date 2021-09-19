@@ -7,30 +7,39 @@ const randomNumber = (min, max) => {
   return value;
 };
 
+const fightOrSkip = () => {
+  //ask player if he/she/they would like to fight or skip using fightOrSkip() function
+  let promptFight = window.prompt(
+    'Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.'
+  );
+
+  //conditional recursive call
+    if (!promptFight) {
+      window.alert("Please try again; you must enter a valid answer to proceed");
+      return fightOrSkip();
+    }
+
+   //if player skips confirm and stop the loop
+   if (promptFight === "skip" || promptFight === "SKIP") {
+    // confirm player wants to skip
+    let confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+    // if yes (true), leave fight
+    if (confirmSkip) {
+      window.alert(
+        playerInfo.name + " has decided to skip this fight. Goodbye!"
+      );
+      // subtract money from playerInfo.money for skipping
+      playerInfo.money -= Math.max(0, playerInfo.money - 10);
+      console.log("playerInfo.money:", playerInfo.money);
+    }
+  }
+}
+
 const fight = (enemy) => {
   // repeat and execute as long as the enemy-robot is alive
   while (enemy.health > 0 && playerInfo.health > 0) {
-    // ask player if they'd liked to fight or run
-    let promptFight = window.prompt(
-      'Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.'
-    );
-
-    //if player skips confirm and stop the loop
-    if (promptFight === "skip" || promptFight === "SKIP") {
-      // confirm player wants to skip
-      let confirmSkip = window.confirm("Are you sure you'd like to quit?");
-
-      // if yes (true), leave fight
-      if (confirmSkip) {
-        window.alert(
-          playerInfo.name + " has decided to skip this fight. Goodbye!"
-        );
-        // subtract money from playerInfo.money for skipping
-        playerInfo.money -= Math.max(0, playerInfo.money - 10);
-        console.log("playerInfo.money:", playerInfo.money);
-        break;
-      }
-    }
+    fightOrSkip(); 
 
     // generate random damage value based on player's attack power
     let damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
@@ -98,10 +107,9 @@ const fight = (enemy) => {
 const getPlayerName = () => {
   let name = "";
 
-  while(name==="" || name === null){
-    window.prompt("Please provide a name for your hunk of metal...")
+  while(!name){
+    name = window.prompt("Please provide a name for your hunk of metal...")
   }
-
 
   console.log("Your robot's name is " + name + ".");
 
