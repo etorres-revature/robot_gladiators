@@ -11,18 +11,18 @@ const fight = (enemy) => {
   // repeat and execute as long as the enemy-robot is alive
   while (enemy.health > 0 && playerInfo.health > 0) {
     // ask player if they'd liked to fight or run
-    let promptFight = window.prompt(
+    let promptFight = prompt(
       'Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.'
     );
 
     //if player skips confirm and stop the loop
     if (promptFight === "skip" || promptFight === "SKIP") {
       // confirm player wants to skip
-      let confirmSkip = window.confirm("Are you sure you'd like to quit?");
+      let confirmSkip = confirm("Are you sure you'd like to quit?");
 
       // if yes (true), leave fight
       if (confirmSkip) {
-        window.alert(
+        alert(
           playerInfo.name + " has decided to skip this fight. Goodbye!"
         );
         // subtract money from playerInfo.money for skipping
@@ -53,7 +53,7 @@ const fight = (enemy) => {
 
     // check enemy's health
     if (enemy.health <= 0) {
-      window.alert(enemy.name + " has died!");
+      alert(enemy.name + " has died!");
 
       //award player money for winning
       playerInfo.money += 20;
@@ -61,7 +61,7 @@ const fight = (enemy) => {
       //leave while() loop since enemy is dead
       break;
     } else {
-      window.alert(enemy.name + " still has " + enemy.health + " health left.");
+      alert(enemy.name + " still has " + enemy.health + " health left.");
     }
 
     damage = randomNumber(enemy.attack - 3, enemy.attack);
@@ -84,11 +84,11 @@ const fight = (enemy) => {
 
     // check player's health
     if (playerInfo.health <= 0) {
-      window.alert(playerInfo.name + " has died!");
+      alert(playerInfo.name + " has died!");
       //leave while() loop if player is dead
       break;
     } else {
-      window.alert(
+      alert(
         playerInfo.name + " still has " + playerInfo.health + " health left."
       );
     }
@@ -96,7 +96,7 @@ const fight = (enemy) => {
 };
 
 let playerInfo = {
-  name: window.prompt("Please provide a name for your hunk of metal..."),
+  name: prompt("Please provide a name for your hunk of metal..."),
   health: 100,
   attack: 10,
   money: 10,
@@ -112,13 +112,13 @@ let playerInfo = {
       playerInfo.health += randomHealthUpgrade;
       playerInfo.money -= 5;
 
-      window.alert(
+      alert(
         "Refilling player's health by " +
           randomHealthUpgrade +
           " for five dollars."
       );
     } else {
-      window.alert(playerInfo.money + " is not enough to buy this item...");
+      alert(playerInfo.money + " is not enough to buy this item...");
     }
   },
   upgradeAttack: () => {
@@ -128,13 +128,13 @@ let playerInfo = {
       playerInfo.attack += randomAttackUpgrade;
       playerInfo.money -= 5;
 
-      window.alert(
+      alert(
         "Upgrading player's attack by " +
           randomAttackUpgrade +
           " for five dollars."
       );
     } else {
-      window.alert(playerInfo.money + " is not enough to buy this item...");
+      alert(playerInfo.money + " is not enough to buy this item...");
     }
   },
 };
@@ -163,7 +163,7 @@ const startGame = () => {
   for (let i = 0; i < enemyInfo.length; i++) {
     // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
     if (playerInfo.health > 0) {
-      window.alert(
+      alert(
         "WELCOME TO ROBOT GLADIATORS!!! \n\nThis is round " + (i + 1)
       );
 
@@ -182,7 +182,7 @@ const startGame = () => {
       // if player is still alive and we're not at the last enemy in the array
       if (i < enemy.names.length - 1 && playerInfo.health > 0) {
         // ask if player wants to use the store before next round
-        var storeConfirm = window.confirm(
+        var storeConfirm = confirm(
           "The fight is over, visit the store before the next round?"
         );
 
@@ -191,7 +191,7 @@ const startGame = () => {
         }
       }
     } else {
-      window.alert(
+      alert(
         playerInfo.name +
           " has lost in battle to " +
           pickedenemy.name +
@@ -209,23 +209,23 @@ const startGame = () => {
 const endGame = () => {
   // if player is still alive, player wins!
   if (playerInfo.health > 0) {
-    window.alert(
+    alert(
       "Great job, you've survived the game! You now have a score of " +
         playerInfo.money +
         "."
     );
   } else {
-    window.alert("You've lost your robot in battle.");
+    alert("You've lost your robot in battle.");
   }
 
   // ask player if they'd like to play again
-  let playAgainConfirm = window.confirm("Would you like to play again?");
+  let playAgainConfirm = confirm("Would you like to play again?");
 
   if (playAgainConfirm) {
     // restart the game
     startGame();
   } else {
-    window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+    alert("Thank you for playing Robot Gladiators! Come back soon!");
   }
 };
 
@@ -233,7 +233,7 @@ const shop = () => {
   //   console.log("entered the shop");
 
   // ask player what they'd like to do
-  var shopOptionPrompt = window.prompt(
+  var shopOptionPrompt = prompt(
     "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? \n\nPlease enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
   );
 
@@ -251,13 +251,13 @@ const shop = () => {
 
     case "LEAVE":
     case "leave":
-      window.alert("Leaving the store.");
+      alert("Leaving the store.");
 
       // do nothing, so function will end
       break;
 
     default:
-      window.alert("You did not pick a valid option. Try again.");
+      alert("You did not pick a valid option. Try again.");
 
       // call shop() again to force player to pick a valid option
       shop();
