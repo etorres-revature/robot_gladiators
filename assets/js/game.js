@@ -16,11 +16,14 @@ const fightOrSkip = () => {
   //conditional recursive call
     if (!promptFight) {
       window.alert("Please try again; you must enter a valid answer to proceed");
+       // use return to call it again and stop the rest of this function from running
       return fightOrSkip();
     }
+    
+  promptFight.toLowerCase();
 
    //if player skips confirm and stop the loop
-   if (promptFight === "skip" || promptFight === "SKIP") {
+   if (promptFight === "skip") {
     // confirm player wants to skip
     let confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
@@ -30,16 +33,23 @@ const fightOrSkip = () => {
         playerInfo.name + " has decided to skip this fight. Goodbye!"
       );
       // subtract money from playerInfo.money for skipping
-      playerInfo.money -= Math.max(0, playerInfo.money - 10);
+      playerInfo.money = Math.max(0, playerInfo.money - 10);
       console.log("playerInfo.money:", playerInfo.money);
+
+      // return true if player wants to leave
+      return true;
     }
   }
+  return false;
 }
 
 const fight = (enemy) => {
   // repeat and execute as long as the enemy-robot is alive
   while (enemy.health > 0 && playerInfo.health > 0) {
-    fightOrSkip(); 
+    if (fightOrSkip()){
+      //if true, leave fight by breaking loop
+      break;
+    }
 
     // generate random damage value based on player's attack power
     let damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
