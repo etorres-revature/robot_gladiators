@@ -7,41 +7,29 @@ const randomNumber = (min, max) => {
   return value;
 };
 
-const fight = (enemy) => {
-  // repeat and execute as long as the enemy-robot is alive
-  while (enemy.health > 0 && playerInfo.health > 0) {
-    // ask player if they'd liked to fight or run
-    let promptFight = prompt(
-      'Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.'
-    );
+const fightOrSkip = () => {
+  //ask player if he/she/they would like to fight or skip using fightOrSkip() function
+  let promptFight = window.prompt(
+    'Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.'
+  );
 
-    //if player skips confirm and stop the loop
-    if (promptFight === "skip" || promptFight === "SKIP") {
-      // confirm player wants to skip
-      let confirmSkip = confirm("Are you sure you'd like to quit?");
+  //conditional recursive call
+  if (!promptFight) {
+    window.alert("Please try again; you must enter a valid answer to proceed");
+    // use return to call it again and stop the rest of this function from running
+    return fightOrSkip();
+  }
 
-      // if yes (true), leave fight
-      if (confirmSkip) {
-        alert(
-          playerInfo.name + " has decided to skip this fight. Goodbye!"
-        );
-        // subtract money from playerInfo.money for skipping
-        playerInfo.money -= Math.max(0, playerInfo.money - 10);
-        console.log("playerInfo.money:", playerInfo.money);
-        break;
-      }
-    }
+  promptFight.toLowerCase();
 
   //if player skips confirm and stop the loop
   if (promptFight === "skip") {
     // confirm player wants to skip
-    let confirmSkip = window.confirm("Are you sure you'd like to quit?");
+    let confirmSkip = confirm("Are you sure you'd like to quit?");
 
     // if yes (true), leave fight
     if (confirmSkip) {
-      window.alert(
-        playerInfo.name + " has decided to skip this fight. Goodbye!"
-      );
+      alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
       // subtract money from playerInfo.money for skipping
       playerInfo.money = Math.max(0, playerInfo.money - 10);
       console.log("playerInfo.money:", playerInfo.money);
@@ -89,7 +77,7 @@ const fight = (enemy) => {
 
       // check enemy's health
       if (enemy.health <= 0) {
-        window.alert(enemy.name + " has died!");
+        alert(enemy.name + " has died!");
 
         //award player money for winning
         playerInfo.money += 20;
@@ -97,9 +85,7 @@ const fight = (enemy) => {
         //leave while() loop since enemy is dead
         break;
       } else {
-        window.alert(
-          enemy.name + " still has " + enemy.health + " health left."
-        );
+        alert(enemy.name + " still has " + enemy.health + " health left.");
       }
       //player gets attached first
     } else {
@@ -123,11 +109,11 @@ const fight = (enemy) => {
 
       // check player's health
       if (playerInfo.health <= 0) {
-        window.alert(playerInfo.name + " has died!");
+        alert(playerInfo.name + " has died!");
         //leave while() loop if player is dead
         break;
       } else {
-        window.alert(
+        alert(
           playerInfo.name + " still has " + playerInfo.health + " health left."
         );
       }
@@ -217,9 +203,7 @@ const startGame = () => {
   for (let i = 0; i < enemyInfo.length; i++) {
     // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
     if (playerInfo.health > 0) {
-      alert(
-        "WELCOME TO ROBOT GLADIATORS!!! \n\nThis is round " + (i + 1)
-      );
+      alert("WELCOME TO ROBOT GLADIATORS!!! \n\nThis is round " + (i + 1));
 
       // pick new enemy to fight based on the index of the enemy.names array
       let pickedEnemyObj = enemyInfo[i];
