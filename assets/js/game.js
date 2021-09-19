@@ -245,7 +245,7 @@ const endGame = () => {
   );
 
   //check localStorage for high score, it it is not there, use 0
-  const highScore = localStorage.getItem("highScore");
+  let highScore = localStorage.getItem("highScore");
   if (!highScore) {
     highScore = 0;
   }
