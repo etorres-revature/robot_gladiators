@@ -248,19 +248,36 @@ const startGame = () => {
 
 // function to end the entire game
 const endGame = () => {
-  // if player is still alive, player wins!
-  if (playerInfo.health > 0) {
+  window.alert(
+    "Great job surviving through all rounds.  Let's compare your score to the high score"
+  );
+
+  //check localStorage for high score, it it is not there, use 0
+  const highScore = localStorage.getItem("highScore");
+  if (!highScore) {
+    highScore = 0;
+  }
+
+  // if player has more money than highScore, player has new high score
+  if (playerInfo.money > highScore) {
+    localStorage.setItem("highScore", playerInfo.money);
+    localStorage.setItem("name", playerInfo.name);
+
     window.alert(
-      "Great job, you've survived the game! You now have a score of " +
+      playerInfo.name +
+        "now has the high score score of " +
         playerInfo.money +
         "."
     );
   } else {
-    window.alert("You've lost your robot in battle.");
+    window.alert(
+      highScore +
+        " is the high score.  You have not attained the high score. Please try again"
+    );
   }
 
   // ask player if they'd like to play again
-  let playAgainConfirm = window.confirm("Would you like to play again?");
+  const playAgainConfirm = window.confirm("Would you like to play again?");
 
   if (playAgainConfirm) {
     // restart the game
@@ -274,7 +291,7 @@ const shop = () => {
   //   console.log("entered the shop");
 
   // ask player what they'd like to do
-  var shopOptionPrompt = window.prompt(
+  const shopOptionPrompt = window.prompt(
     "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? \n\n Press 1 to 'REFILL'; Press 2 to 'UPGRADE', or Press 3 to 'LEAVE' to make a choice."
   );
 
