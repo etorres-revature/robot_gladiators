@@ -228,9 +228,7 @@ const startGame = () => {
     } else {
       alert(
         playerInfo.name +
-          " has lost in battle to " +
-          pickedEnemyObj.name +
-          "! Game Over!!!"
+          " has lost in battle! Game Over!!!"
       );
       break;
     }
