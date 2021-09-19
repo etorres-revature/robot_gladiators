@@ -215,9 +215,9 @@ const startGame = () => {
       fight(pickedEnemyObj);
 
       // if player is still alive and we're not at the last enemy in the array
-      if (i < enemy.names.length - 1 && playerInfo.health > 0) {
+      if (i < enemyInfo.length - 1 && playerInfo.health > 0) {
         // ask if player wants to use the store before next round
-        var storeConfirm = confirm(
+        const storeConfirm = confirm(
           "The fight is over, visit the store before the next round?"
         );
 
