@@ -14,16 +14,16 @@ const fightOrSkip = () => {
   );
 
   //conditional recursive call
-    if (!promptFight) {
-      window.alert("Please try again; you must enter a valid answer to proceed");
-       // use return to call it again and stop the rest of this function from running
-      return fightOrSkip();
-    }
-    
+  if (!promptFight) {
+    window.alert("Please try again; you must enter a valid answer to proceed");
+    // use return to call it again and stop the rest of this function from running
+    return fightOrSkip();
+  }
+
   promptFight.toLowerCase();
 
-   //if player skips confirm and stop the loop
-   if (promptFight === "skip") {
+  //if player skips confirm and stop the loop
+  if (promptFight === "skip") {
     // confirm player wants to skip
     let confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
@@ -41,12 +41,12 @@ const fightOrSkip = () => {
     }
   }
   return false;
-}
+};
 
 const fight = (enemy) => {
   // repeat and execute as long as the enemy-robot is alive
   while (enemy.health > 0 && playerInfo.health > 0) {
-    if (fightOrSkip()){
+    if (fightOrSkip()) {
       //if true, leave fight by breaking loop
       break;
     }
@@ -117,14 +117,14 @@ const fight = (enemy) => {
 const getPlayerName = () => {
   let name = "";
 
-  while(!name){
-    name = window.prompt("Please provide a name for your hunk of metal...")
+  while (!name) {
+    name = window.prompt("Please provide a name for your hunk of metal...");
   }
 
   console.log("Your robot's name is " + name + ".");
 
   return name;
-}
+};
 
 let playerInfo = {
   name: getPlayerName(),
@@ -262,26 +262,23 @@ const shop = () => {
 
   // ask player what they'd like to do
   var shopOptionPrompt = window.prompt(
-    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? \n\nPlease enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? \n\n Press 1 to 'REFILL'; Press 2 to 'UPGRADE', or Press 3 to 'LEAVE' to make a choice."
   );
+
+  shopOptionPrompt = parseInt(shopOptionPrompt);
 
   // use switch to carry out action
   switch (shopOptionPrompt) {
-    case "REFILL":
-    case "refill":
+    case 1:
       playerInfo.refillHealth();
       break;
 
-    case "UPGRADE":
-    case "upgrade":
+    case 2:
       playerInfo.upgradeAttack();
       break;
 
-    case "LEAVE":
-    case "leave":
+    case 3:
       window.alert("Leaving the store.");
-
-      // do nothing, so function will end
       break;
 
     default:
